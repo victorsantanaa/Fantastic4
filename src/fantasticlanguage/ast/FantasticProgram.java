@@ -15,7 +15,7 @@ public class FantasticProgram {
     public void generateTarget() {
         StringBuilder str = new StringBuilder();
         str.append("import java.util.Scanner;\n");
-        str.append("public class MainClass2{ \n");
+        str.append("public class MainClass10{ \n");
         str.append("  public static void main(String args[]){\n ");
         str.append("      Scanner _key = new Scanner(System.in);\n");
         for (FantasticSymbol symbol: varTable.getAll()) {
@@ -28,7 +28,7 @@ public class FantasticProgram {
         str.append("}");
 
         try {
-            FileWriter fr = new FileWriter(new File("MainClass2.java"));
+            FileWriter fr = new FileWriter(new File("MainClass10.java"));
             fr.write(str.toString());
             fr.close();
         }

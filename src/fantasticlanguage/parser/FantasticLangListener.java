@@ -1,7 +1,15 @@
 // Generated from FantasticLang.g4 by ANTLR 4.7.1
 package fantasticlanguage.parser;
 
-    import org.antlr.v4.runtime.tree.ParseTreeListener;
+    import fantasticlanguage.datastructures.FantasticSymbol;
+    import fantasticlanguage.datastructures.FantasticVariable;
+    import fantasticlanguage.datastructures.FantasticSymbolTable;
+    import fantasticlanguage.exceptions.FantasticSemanticException;
+    import fantasticlanguage.ast.*;
+    import java.util.ArrayList;
+    import java.util.Stack;
+
+import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
  * This interface defines a complete listener for a parse tree produced by
