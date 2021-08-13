@@ -4,12 +4,23 @@
 ## Projeto de Compiladores
 
 ### Grupo:
+<<<<<<< HEAD
 | Nome  | RA|
 |-------|----|
 | Vaz   | 000001|
 |Giovana| 00000|
 | Leonardo Hampshire|11013815|
 | Vitor | 00000|
+=======
+- Vaz
+    - RA -000001
+- Giovana
+    - RA - 00000
+- Leonardo Hampshire
+  - RA 11013815
+- Victor Santana Ribeiro
+  - RA 21057716
+>>>>>>> 2000c7891187fa45d87c2b88fcdf40b74a27c8b5
 
 ### Linguagem utilizada e ordem de implementação
     Linguagem escolhida: JAVA
@@ -27,12 +38,16 @@ A ordem escolhida foi a seguinte:
 
 | Itens Obrigatórios  |  Entregue  |
 | ------------------- | ------------------- |
-|  Possuir 2 tipos de variáveis (pelo menos 1 String))                            |  - |
-|  Possuir a instrução **if-else**                                                |  - |
+|  Possuir 2 tipos de variáveis (pelo menos 1 String))                            |  Ok|
+|  Possuir a instrução **if-else**                                                |  Ok |
 |  Pelo menos 1 estrutura de repetição                                            |  - |
 |  Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos  |  - |
-|  Possui operações de Entrada e Saída                                            |  - |
-|  Aceitar números decimais                                                       |  - |
+|  Possui operações de Entrada e Saída                                            | Ok |
+|  Aceitar números decimais                                                       |  Ok |
 |  Verificar se variável foi ou não declarada                                     |  - |
 |  Verificar se variável declarada foi ou não utilizada                           |  - |
 |  Linguagem Destino (C/Java/Puthon)                                              |  Ok |
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2000c7891187fa45d87c2b88fcdf40b74a27c8b5
