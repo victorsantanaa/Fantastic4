@@ -19,11 +19,12 @@ public class MainClass {
             parser = new FantasticLangParser(tokenStream);
 
             parser.prog();
-            System.out.println("Compilation Successful");
+
 
             parser.exibeComandos();
 
             parser.generateCode();
+            System.out.println("Compilation Successful");
 
 
         } catch (FantasticSemanticException exception) {
