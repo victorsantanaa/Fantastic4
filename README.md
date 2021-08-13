@@ -7,7 +7,7 @@
 
 | Nome  | RA|
 |-------|----|
-| Vaz   | 000001|
+| Filipe Vaz   | 11104015|
 |Giovana| 00000|
 | Leonardo Hampshire|11013815|
 | Vitor | 00000|
