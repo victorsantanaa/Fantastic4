@@ -4,23 +4,13 @@
 ## Projeto de Compiladores
 
 ### Grupo:
-<<<<<<< HEAD
+
 | Nome  | RA|
 |-------|----|
 | Vaz   | 000001|
 |Giovana| 00000|
 | Leonardo Hampshire|11013815|
 | Vitor | 00000|
-=======
-- Vaz
-    - RA -000001
-- Giovana
-    - RA - 00000
-- Leonardo Hampshire
-  - RA 11013815
-- Victor Santana Ribeiro
-  - RA 21057716
->>>>>>> 2000c7891187fa45d87c2b88fcdf40b74a27c8b5
 
 ### Linguagem utilizada e ordem de implementação
     Linguagem escolhida: JAVA
@@ -47,7 +37,3 @@ A ordem escolhida foi a seguinte:
 |  Verificar se variável foi ou não declarada                                     |  - |
 |  Verificar se variável declarada foi ou não utilizada                           |  - |
 |  Linguagem Destino (C/Java/Puthon)                                              |  Ok |
-<<<<<<< HEAD
-=======
-
->>>>>>> 2000c7891187fa45d87c2b88fcdf40b74a27c8b5
