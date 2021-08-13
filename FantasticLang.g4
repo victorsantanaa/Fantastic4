@@ -257,6 +257,11 @@ termo		: ID { verificaID(_input.LT(-1).getText());
               {
               	_exprContent += _input.LT(-1).getText();
               }
+              |
+              TEXT
+              {
+                _exprContent += _input.LT(-1).getText();
+              }
 			;
 
 
@@ -284,6 +289,11 @@ ACH  : '{'
 FCH  : '}'
      ;
 
+ASP  : '"'
+	 ;
+
+TEXT	: '"' ( '\\"' | . )*? '"'
+		;
 
 OPREL : '>' | '<' | '>=' | '<=' | '==' | '!='
       ;

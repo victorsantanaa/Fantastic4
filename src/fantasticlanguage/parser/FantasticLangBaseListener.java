@@ -1,6 +1,14 @@
 // Generated from FantasticLang.g4 by ANTLR 4.7.1
 package fantasticlanguage.parser;
 
+    import fantasticlanguage.datastructures.FantasticSymbol;
+    import fantasticlanguage.datastructures.FantasticVariable;
+    import fantasticlanguage.datastructures.FantasticSymbolTable;
+    import fantasticlanguage.exceptions.FantasticSemanticException;
+    import fantasticlanguage.ast.*;
+    import java.util.ArrayList;
+    import java.util.Stack;
+
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
