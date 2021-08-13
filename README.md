@@ -1,7 +1,7 @@
 <p align="center"><a target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Logo_UFABC.svg" width="150"></a></p>
 
 # Fantastic 4 
-##Projeto de Compiladores
+## Projeto de Compiladores
 
 ### Grupo:
 - Vaz
@@ -24,6 +24,7 @@ A ordem escolhida foi a seguinte:
 - item 4
 
 ## **[Link Vídeo Explicativo](https://youtube.com.br)**
+<<<<<<< HEAD
 
 ## Itens do Projeto
 
@@ -38,3 +39,5 @@ A ordem escolhida foi a seguinte:
 |  Verificar se variável foi ou não declarada                                     |  - |
 |  Verificar se variável declarada foi ou não utilizada                           |  - |
 |  Linguagem Destino (C/Java/Puthon)                                              |  Ok |
+=======
+>>>>>>> 91a9c31e711e0fc6e2d97ac8d539f8b4bc028094
