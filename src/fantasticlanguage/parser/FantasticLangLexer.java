@@ -1,25 +1,21 @@
-// Generated from IsiLang.g4 by ANTLR 4.7.1
-package isilanguage.parser;
+// Generated from FantasticLang.g4 by ANTLR 4.7.1
+package fantasticlanguage.parser;
 
-    import isilanguage.datastructures.IsiSymbol;
-    import isilanguage.datastructures.IsiVariable;
-    import isilanguage.datastructures.IsiSymbolTable;
-    import isilanguage.exceptions.IsiSemanticException;
-    import isilanguage.ast.*;
+    import fantasticlanguage.datastructures.FantasticSymbol;
+	import fantasticlanguage.datastructures.FantasticSymbolTable;
+	import fantasticlanguage.exceptions.FantasticSemanticException;
+	import fantasticlanguage.ast.*;
     import java.util.ArrayList;
     import java.util.Stack;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.*;
+	import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class IsiLangLexer extends Lexer {
+public class FantasticLangLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -88,9 +84,9 @@ public class IsiLangLexer extends Lexer {
 		private int _tipo;
 		private String _varName;
 		private String _varValue;
-		private IsiSymbolTable symbolTable = new IsiSymbolTable();
-		private IsiSymbol symbol;
-		private IsiProgram program = new IsiProgram();
+		private FantasticSymbolTable symbolTable = new FantasticSymbolTable();
+		private FantasticSymbol symbol;
+		private FantasticProgram program = new FantasticProgram();
 		private ArrayList<AbstractCommand> curThread;
 		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 		private String _readID;
@@ -103,7 +99,7 @@ public class IsiLangLexer extends Lexer {
 
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
-				throw new IsiSemanticException("Symbol "+id+" not declared");
+				throw new FantasticSemanticException("Symbol "+id+" not declared");
 			}
 		}
 
@@ -118,13 +114,13 @@ public class IsiLangLexer extends Lexer {
 		}
 
 
-	public IsiLangLexer(CharStream input) {
+	public FantasticLangLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "IsiLang.g4"; }
+	public String getGrammarFileName() { return "FantasticLang.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

@@ -1,22 +1,22 @@
-package isilanguage.main;
+package fantasticlanguage.main;
 
-import isilanguage.exceptions.IsiSemanticException;
-import isilanguage.parser.IsiLangLexer;
-import isilanguage.parser.IsiLangParser;
+import fantasticlanguage.exceptions.FantasticSemanticException;
+import fantasticlanguage.parser.FantasticLangLexer;
+import fantasticlanguage.parser.FantasticLangParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 public class MainClass {
     public static void main(String[] args) {
         try {
-            IsiLangLexer lexer;
-            IsiLangParser parser;
+            FantasticLangLexer lexer;
+            FantasticLangParser parser;
             //le o arquivo e é a entrada do analisador léxico
-            lexer = new IsiLangLexer(CharStreams.fromFileName("input.isi"));
+            lexer = new FantasticLangLexer(CharStreams.fromFileName("input.fantastic"));
             //cria um fluxo de tokens para passar o parser
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
             //cria o parser a partir de tokenStream
-            parser = new IsiLangParser(tokenStream);
+            parser = new FantasticLangParser(tokenStream);
 
             parser.prog();
             System.out.println("Compilation Successful");
@@ -26,7 +26,7 @@ public class MainClass {
             parser.generateCode();
 
 
-        } catch (IsiSemanticException exception) {
+        } catch (FantasticSemanticException exception) {
             System.out.println("Semantic Error: " + exception.getMessage());
         } catch (Exception exception) {
             System.out.println("Error: " + exception.getMessage());

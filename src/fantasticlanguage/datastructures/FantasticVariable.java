@@ -1,6 +1,6 @@
-package isilanguage.datastructures;
+package fantasticlanguage.datastructures;
 
-public class IsiVariable extends IsiSymbol {
+public class FantasticVariable extends FantasticSymbol {
 
     public static final int NUMBER=0;
     public static final int TEXT  =1;
@@ -8,7 +8,7 @@ public class IsiVariable extends IsiSymbol {
     private int type;
     private String value;
 
-    public IsiVariable(String name, int type, String value) {
+    public FantasticVariable(String name, int type, String value) {
         super(name);
         this.type = type;
         this.value = value;
@@ -32,7 +32,7 @@ public class IsiVariable extends IsiSymbol {
 
     @Override
     public String toString() {
-        return "IsiVariable [name=" + name + ", type=" + type + ", value=" + value + "]";
+        return "FantasticVariable [name=" + name + ", type=" + type + ", value=" + value + "]";
     }
 
     public String generateJavaCode() {

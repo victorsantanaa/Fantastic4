@@ -1,25 +1,22 @@
-// Generated from IsiLang.g4 by ANTLR 4.7.1
-package isilanguage.parser;
+// Generated from FantasticLang.g4 by ANTLR 4.7.1
+package fantasticlanguage.parser;
 
-    import isilanguage.datastructures.IsiSymbol;
-    import isilanguage.datastructures.IsiVariable;
-    import isilanguage.datastructures.IsiSymbolTable;
-    import isilanguage.exceptions.IsiSemanticException;
-    import isilanguage.ast.*;
+    import fantasticlanguage.datastructures.FantasticSymbol;
+	import fantasticlanguage.datastructures.FantasticVariable;
+	import fantasticlanguage.datastructures.FantasticSymbolTable;
+	import fantasticlanguage.exceptions.FantasticSemanticException;
+	import fantasticlanguage.ast.*;
     import java.util.ArrayList;
     import java.util.Stack;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
-import org.antlr.v4.runtime.tree.*;
+    import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class IsiLangParser extends Parser {
+public class FantasticLangParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -80,7 +77,7 @@ public class IsiLangParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "IsiLang.g4"; }
+	public String getGrammarFileName() { return "FantasticLang.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -95,9 +92,9 @@ public class IsiLangParser extends Parser {
 		private int _tipo;
 		private String _varName;
 		private String _varValue;
-		private IsiSymbolTable symbolTable = new IsiSymbolTable();
-		private IsiSymbol symbol;
-		private IsiProgram program = new IsiProgram();
+		private FantasticSymbolTable symbolTable = new FantasticSymbolTable();
+		private FantasticSymbol symbol;
+		private FantasticProgram program = new FantasticProgram();
 		private ArrayList<AbstractCommand> curThread;
 		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 		private String _readID;
@@ -110,7 +107,7 @@ public class IsiLangParser extends Parser {
 
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
-				throw new IsiSemanticException("Symbol "+id+" not declared");
+				throw new FantasticSemanticException("Symbol "+id+" not declared");
 			}
 		}
 
@@ -124,7 +121,7 @@ public class IsiLangParser extends Parser {
 			program.generateTarget();
 		}
 
-	public IsiLangParser(TokenStream input) {
+	public FantasticLangParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -141,11 +138,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_prog; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterProg(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterProg(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitProg(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitProg(this);
 		}
 	}
 
@@ -193,11 +190,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_decl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterDecl(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterDecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitDecl(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitDecl(this);
 		}
 	}
 
@@ -239,14 +236,14 @@ public class IsiLangParser extends Parser {
 		public TipoContext tipo() {
 			return getRuleContext(TipoContext.class,0);
 		}
-		public List<TerminalNode> ID() { return getTokens(IsiLangParser.ID); }
+		public List<TerminalNode> ID() { return getTokens(FantasticLangParser.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(IsiLangParser.ID, i);
+			return getToken(FantasticLangParser.ID, i);
 		}
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
-		public List<TerminalNode> VIR() { return getTokens(IsiLangParser.VIR); }
+		public TerminalNode SC() { return getToken(FantasticLangParser.SC, 0); }
+		public List<TerminalNode> VIR() { return getTokens(FantasticLangParser.VIR); }
 		public TerminalNode VIR(int i) {
-			return getToken(IsiLangParser.VIR, i);
+			return getToken(FantasticLangParser.VIR, i);
 		}
 		public DeclaravarContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -254,11 +251,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_declaravar; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterDeclaravar(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterDeclaravar(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitDeclaravar(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitDeclaravar(this);
 		}
 	}
 
@@ -276,12 +273,12 @@ public class IsiLangParser extends Parser {
 
 				                  _varName = _input.LT(-1).getText();
 				                  _varValue = null;
-				                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+				                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
 				                  if (!symbolTable.exists(_varName)){
 				                     symbolTable.add(symbol);
 				                  }
 				                  else{
-				                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+				                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
 				                  }
 			                    
 			setState(43);
@@ -297,12 +294,12 @@ public class IsiLangParser extends Parser {
 
 					                  _varName = _input.LT(-1).getText();
 					                  _varValue = null;
-					                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+					                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
 					                  if (!symbolTable.exists(_varName)){
 					                     symbolTable.add(symbol);
 					                  }
 					                  else{
-					                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+					                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
 					                  }
 				                    
 				}
@@ -333,11 +330,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_tipo; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterTipo(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterTipo(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitTipo(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitTipo(this);
 		}
 	}
 
@@ -353,7 +350,7 @@ public class IsiLangParser extends Parser {
 				{
 				setState(48);
 				match(T__2);
-				 _tipo = IsiVariable.NUMBER;  
+				 _tipo = FantasticVariable.NUMBER;
 				}
 				break;
 			case T__3:
@@ -361,7 +358,7 @@ public class IsiLangParser extends Parser {
 				{
 				setState(50);
 				match(T__3);
-				 _tipo = IsiVariable.TEXT;  
+				 _tipo = FantasticVariable.TEXT;
 				}
 				break;
 			default:
@@ -392,11 +389,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_bloco; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterBloco(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterBloco(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitBloco(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitBloco(this);
 		}
 	}
 
@@ -456,11 +453,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_cmd; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterCmd(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterCmd(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitCmd(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitCmd(this);
 		}
 	}
 
@@ -515,21 +512,21 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdleituraContext extends ParserRuleContext {
-		public TerminalNode AP() { return getToken(IsiLangParser.AP, 0); }
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode FP() { return getToken(IsiLangParser.FP, 0); }
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
+		public TerminalNode AP() { return getToken(FantasticLangParser.AP, 0); }
+		public TerminalNode ID() { return getToken(FantasticLangParser.ID, 0); }
+		public TerminalNode FP() { return getToken(FantasticLangParser.FP, 0); }
+		public TerminalNode SC() { return getToken(FantasticLangParser.SC, 0); }
 		public CmdleituraContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdleitura; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterCmdleitura(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterCmdleitura(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitCmdleitura(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitCmdleitura(this);
 		}
 	}
 
@@ -553,7 +550,7 @@ public class IsiLangParser extends Parser {
 			setState(71);
 			match(SC);
 
-			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+			              	FantasticVariable var = (FantasticVariable)symbolTable.get(_readID);
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
 			              	stack.peek().add(cmd);
 			              
@@ -571,21 +568,21 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdescritaContext extends ParserRuleContext {
-		public TerminalNode AP() { return getToken(IsiLangParser.AP, 0); }
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode FP() { return getToken(IsiLangParser.FP, 0); }
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
+		public TerminalNode AP() { return getToken(FantasticLangParser.AP, 0); }
+		public TerminalNode ID() { return getToken(FantasticLangParser.ID, 0); }
+		public TerminalNode FP() { return getToken(FantasticLangParser.FP, 0); }
+		public TerminalNode SC() { return getToken(FantasticLangParser.SC, 0); }
 		public CmdescritaContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdescrita; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterCmdescrita(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterCmdescrita(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitCmdescrita(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitCmdescrita(this);
 		}
 	}
 
@@ -626,23 +623,23 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdattribContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode ATTR() { return getToken(IsiLangParser.ATTR, 0); }
+		public TerminalNode ID() { return getToken(FantasticLangParser.ID, 0); }
+		public TerminalNode ATTR() { return getToken(FantasticLangParser.ATTR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
+		public TerminalNode SC() { return getToken(FantasticLangParser.SC, 0); }
 		public CmdattribContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdattrib; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterCmdattrib(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterCmdattrib(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitCmdattrib(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitCmdattrib(this);
 		}
 	}
 
@@ -682,22 +679,22 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdselecaoContext extends ParserRuleContext {
-		public TerminalNode AP() { return getToken(IsiLangParser.AP, 0); }
-		public List<TerminalNode> ID() { return getTokens(IsiLangParser.ID); }
+		public TerminalNode AP() { return getToken(FantasticLangParser.AP, 0); }
+		public List<TerminalNode> ID() { return getTokens(FantasticLangParser.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(IsiLangParser.ID, i);
+			return getToken(FantasticLangParser.ID, i);
 		}
-		public TerminalNode OPREL() { return getToken(IsiLangParser.OPREL, 0); }
-		public TerminalNode FP() { return getToken(IsiLangParser.FP, 0); }
-		public List<TerminalNode> ACH() { return getTokens(IsiLangParser.ACH); }
+		public TerminalNode OPREL() { return getToken(FantasticLangParser.OPREL, 0); }
+		public TerminalNode FP() { return getToken(FantasticLangParser.FP, 0); }
+		public List<TerminalNode> ACH() { return getTokens(FantasticLangParser.ACH); }
 		public TerminalNode ACH(int i) {
-			return getToken(IsiLangParser.ACH, i);
+			return getToken(FantasticLangParser.ACH, i);
 		}
-		public List<TerminalNode> FCH() { return getTokens(IsiLangParser.FCH); }
+		public List<TerminalNode> FCH() { return getTokens(FantasticLangParser.FCH); }
 		public TerminalNode FCH(int i) {
-			return getToken(IsiLangParser.FCH, i);
+			return getToken(FantasticLangParser.FCH, i);
 		}
-		public TerminalNode NUMBER() { return getToken(IsiLangParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(FantasticLangParser.NUMBER, 0); }
 		public List<CmdContext> cmd() {
 			return getRuleContexts(CmdContext.class);
 		}
@@ -710,11 +707,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_cmdselecao; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterCmdselecao(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterCmdselecao(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitCmdselecao(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitCmdselecao(this);
 		}
 	}
 
@@ -831,9 +828,9 @@ public class IsiLangParser extends Parser {
 		public TermoContext termo(int i) {
 			return getRuleContext(TermoContext.class,i);
 		}
-		public List<TerminalNode> OP() { return getTokens(IsiLangParser.OP); }
+		public List<TerminalNode> OP() { return getTokens(FantasticLangParser.OP); }
 		public TerminalNode OP(int i) {
-			return getToken(IsiLangParser.OP, i);
+			return getToken(FantasticLangParser.OP, i);
 		}
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -841,11 +838,11 @@ public class IsiLangParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_expr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterExpr(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitExpr(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitExpr(this);
 		}
 	}
 
@@ -889,19 +886,19 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class TermoContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode NUMBER() { return getToken(IsiLangParser.NUMBER, 0); }
+		public TerminalNode ID() { return getToken(FantasticLangParser.ID, 0); }
+		public TerminalNode NUMBER() { return getToken(FantasticLangParser.NUMBER, 0); }
 		public TermoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_termo; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).enterTermo(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).enterTermo(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof IsiLangListener ) ((IsiLangListener)listener).exitTermo(this);
+			if ( listener instanceof FantasticLangListener) ((FantasticLangListener)listener).exitTermo(this);
 		}
 	}
 

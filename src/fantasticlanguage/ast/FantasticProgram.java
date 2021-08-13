@@ -1,14 +1,14 @@
-package isilanguage.ast;
+package fantasticlanguage.ast;
 
-import isilanguage.datastructures.IsiSymbol;
-import isilanguage.datastructures.IsiSymbolTable;
+import fantasticlanguage.datastructures.FantasticSymbol;
+import fantasticlanguage.datastructures.FantasticSymbolTable;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class IsiProgram {
-    private IsiSymbolTable varTable;
+public class FantasticProgram {
+    private FantasticSymbolTable varTable;
     private ArrayList<AbstractCommand> comandos;
     private String programName;
 
@@ -18,7 +18,7 @@ public class IsiProgram {
         str.append("public class MainClass2{ \n");
         str.append("  public static void main(String args[]){\n ");
         str.append("      Scanner _key = new Scanner(System.in);\n");
-        for (IsiSymbol symbol: varTable.getAll()) {
+        for (FantasticSymbol symbol: varTable.getAll()) {
             str.append(symbol.generateJavaCode()+"\n");
         }
         for (AbstractCommand command: comandos) {
@@ -38,11 +38,11 @@ public class IsiProgram {
 
     }
 
-    public IsiSymbolTable getVarTable() {
+    public FantasticSymbolTable getVarTable() {
         return varTable;
     }
 
-    public void setVarTable(IsiSymbolTable varTable) {
+    public void setVarTable(FantasticSymbolTable varTable) {
         this.varTable = varTable;
     }
 

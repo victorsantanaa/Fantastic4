@@ -1,4 +1,4 @@
-package isilanguage.ast;
+package fantasticlanguage.ast;
 
 public abstract class AbstractCommand {
 

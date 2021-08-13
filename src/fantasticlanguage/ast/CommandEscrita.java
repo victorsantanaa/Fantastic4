@@ -1,4 +1,4 @@
-package isilanguage.ast;
+package fantasticlanguage.ast;
 
 public class CommandEscrita extends AbstractCommand {
 

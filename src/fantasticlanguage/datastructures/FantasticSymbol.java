@@ -1,11 +1,11 @@
-package isilanguage.datastructures;
+package fantasticlanguage.datastructures;
 
-public abstract class IsiSymbol {
+public abstract class FantasticSymbol {
 
     protected String name;
 
     public abstract String generateJavaCode();
-    public IsiSymbol(String name) {
+    public FantasticSymbol(String name) {
         this.name = name;
 
     }
@@ -23,7 +23,7 @@ public abstract class IsiSymbol {
 
     @Override
     public String toString() {
-        return "IsiSymbol [name=" + name + "]";
+        return "FantasticSymbol [name=" + name + "]";
     }
 
 

@@ -1,11 +1,11 @@
-grammar IsiLang;
+grammar FantasticLang;
 
 @header{
-    import isilanguage.datastructures.IsiSymbol;
-    import isilanguage.datastructures.IsiVariable;
-    import isilanguage.datastructures.IsiSymbolTable;
-    import isilanguage.exceptions.IsiSemanticException;
-    import isilanguage.ast.*;
+    import fantasticlanguage.datastructures.FantasticSymbol;
+    import fantasticlanguage.datastructures.FantasticVariable;
+    import fantasticlanguage.datastructures.FantasticSymbolTable;
+    import fantasticlanguage.exceptions.FantasticSemanticException;
+    import fantasticlanguage.ast.*;
     import java.util.ArrayList;
     import java.util.Stack;
 }
@@ -14,9 +14,9 @@ grammar IsiLang;
 	private int _tipo;
 	private String _varName;
 	private String _varValue;
-	private IsiSymbolTable symbolTable = new IsiSymbolTable();
-	private IsiSymbol symbol;
-	private IsiProgram program = new IsiProgram();
+	private FantasticSymbolTable symbolTable = new FantasticSymbolTable();
+	private FantasticSymbol symbol;
+	private FantasticProgram program = new FantasticProgram();
 	private ArrayList<AbstractCommand> curThread;
 	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 	private String _readID;
@@ -29,7 +29,7 @@ grammar IsiLang;
 
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
-			throw new IsiSemanticException("Symbol "+id+" not declared");
+			throw new FantasticSemanticException("Symbol "+id+" not declared");
 		}
 	}
 
@@ -58,32 +58,32 @@ decl    :  (declaravar)+
 declaravar :  tipo ID  {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
-	                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
 	                  if (!symbolTable.exists(_varName)){
 	                     symbolTable.add(symbol);
 	                  }
 	                  else{
-	                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+	                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
 	                  }
                     }
               (  VIR
               	 ID {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
-	                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
 	                  if (!symbolTable.exists(_varName)){
 	                     symbolTable.add(symbol);
 	                  }
 	                  else{
-	                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+	                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
 	                  }
                     }
               )*
                SC
            ;
 
-tipo       : 'numero' { _tipo = IsiVariable.NUMBER;  }
-           | 'texto'  { _tipo = IsiVariable.TEXT;  }
+tipo       : 'numero' { _tipo = FantasticVariable.NUMBER;  }
+           | 'texto'  { _tipo = FantasticVariable.TEXT;  }
            ;
 
 bloco	: { curThread = new ArrayList<AbstractCommand>();
@@ -107,7 +107,7 @@ cmdleitura	: 'leia' AP
                      SC
 
               {
-              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+              	FantasticVariable var = (FantasticVariable)symbolTable.get(_readID);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
               	stack.peek().add(cmd);
               }
