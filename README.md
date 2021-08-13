@@ -24,3 +24,17 @@ A ordem escolhida foi a seguinte:
 - item 4
 
 ## **[Link Vídeo Explicativo](https://youtube.com.br)**
+
+## Itens do Projeto
+
+| Itens Obrigatórios  |  Entregue  |
+| ------------------- | ------------------- |
+|  Possuir 2 tipos de variáveis (pelo menos 1 String))                            |  - |
+|  Possuir a instrução **if-else**                                                |  - |
+|  Pelo menos 1 estrutura de repetição                                            |  - |
+|  Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos  |  - |
+|  Possui operações de Entrada e Saída                                            |  - |
+|  Aceitar números decimais                                                       |  - |
+|  Verificar se variável foi ou não declarada                                     |  - |
+|  Verificar se variável declarada foi ou não utilizada                           |  - |
+|  Linguagem Destino (C/Java/Puthon)                                              |  Ok |
