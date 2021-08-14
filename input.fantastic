@@ -3,12 +3,17 @@ programa
   numero a, d;
   texto  t1, t2;
 
-  t1 = 10;
-  d = "abc";
-  escreva(t1);
   a = 10;
-  leia(a);
+  d = 11.8;
+  t1= "abc";
+  escreva(t1);
 
-  a = 1 + 2 * 3;
+    leia(a);
+    leia(d);
+    se(a > d){
+      escreva(a);
+    } senao {
+      escreva(d);
+    }
 
 fimprog;
