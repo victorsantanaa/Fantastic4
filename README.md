@@ -10,7 +10,7 @@
 | Filipe Vaz   | 11104015|
 |Giovana| 00000|
 | Leonardo Hampshire|11013815|
-| Vitor | 00000|
+| Victor Santana Ribeiro | 21057716|
 
 ### Linguagem utilizada e ordem de implementação
     Linguagem escolhida: JAVA
