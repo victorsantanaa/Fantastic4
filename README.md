@@ -8,7 +8,7 @@
 | Nome  | RA|
 |-------|----|
 | Filipe Vaz   | 11104015|
-|Giovana| 00000|
+|Giovana Silva Reis| 11109015|
 | Leonardo Hampshire|11013815|
 | Victor Santana Ribeiro | 21057716|
 
@@ -24,7 +24,7 @@ A ordem escolhida foi a seguinte:
 - Verificar se variável declarada foi ou não utilizada
 - Verificar se variável foi ou não declarada
 
-## **[Link Vídeo Explicativo](https://youtube.com.br)**
+## **[Link Vídeo Explicativo](https://www.youtube.com/watch?v=JYvUsprQjDc)**
 
 ## Itens do Projeto
 
@@ -42,4 +42,4 @@ A ordem escolhida foi a seguinte:
 
 | Itens Opcionais  |  Entregue  |
 | ------------------- | ------------------- |
-|  Veificar se a variável foi ou não inicializada, ou seja, foi atribuído um valor a ela                           | Ok|
+|  Verificar se a variável foi ou não inicializada, ou seja, foi atribuído um valor a ela                           | Ok|
