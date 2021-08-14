@@ -17,10 +17,12 @@
     Método incremental: Cada funcionalidade foi completamente criada, seguindo para a próxima, e a priorização se deu em ordem de complexidade e agrupamento dos requisitos.
 
 A ordem escolhida foi a seguinte:
-- item 1
-- item 2
-- item 3
-- item 4
+- Possuir 2 tipos de variáveis
+- Possui operações de Entrada e Saída
+- Aceitar números decimais    
+- Possui operações de Entrada e Saída
+- Verificar se variável declarada foi ou não utilizada
+- Verificar se variável foi ou não declarada
 
 ## **[Link Vídeo Explicativo](https://youtube.com.br)**
 
@@ -36,4 +38,8 @@ A ordem escolhida foi a seguinte:
 |  Aceitar números decimais                                                       |  Ok |
 |  Verificar se variável foi ou não declarada                                     |  Ok |
 |  Verificar se variável declarada foi ou não utilizada                           |  Ok |
-|  Linguagem Destino (C/Java/Puthon)                                              |  Ok |
+|  Linguagem Destino (C/Java/Python)                                              | Java - Ok |
+
+| Itens Opcionais  |  Entregue  |
+| ------------------- | ------------------- |
+|  Veificar se a variável foi ou não inicializada, ou seja, foi atribuído um valor a ela                           | Ok|
