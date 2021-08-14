@@ -99,6 +99,7 @@ public class FantasticLangParser extends Parser {
 		private String _varValue;
 		private FantasticSymbolTable symbolTable = new FantasticSymbolTable();
 		private FantasticSymbol symbol;
+		private FantasticVariable variable;
 		private FantasticProgram program = new FantasticProgram();
 		private ArrayList<AbstractCommand> curThread;
 		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
@@ -115,6 +116,38 @@ public class FantasticLangParser extends Parser {
 				throw new FantasticSemanticException("Symbol "+id+" not declared");
 			}
 		}
+
+		public void verificaInicializacao(String id) {
+	        if(!symbolTable.get(id).isInit()) {
+	            throw new FantasticSemanticException("Variable "+id+" not init");
+	        }
+		}
+
+	    public void verificaText(String id) {
+	            verificaID(id);
+	            FantasticVariable var = symbolTable.get(id);
+	            if(var.getType() != FantasticVariable.TEXT){
+	                throw new FantasticSemanticException("variable " + var.getName() +"NOT A TEXT");
+	            }
+	    }
+
+	    public void verificaNumero(String id) {
+	            verificaID(id);
+	            FantasticVariable var = symbolTable.get(id);
+	            if(var.getType() != FantasticVariable.NUMBER){
+	                throw new FantasticSemanticException("variable " + var.getName() +"NOT A NUMBER");
+	            }
+	    }
+
+	        public void verificaUsoVars() {
+	            for(FantasticSymbol symbol : symbolTable.values()) {
+	                FantasticVariable var = (FantasticVariable) symbol;
+	                if(var.getValue() == null) {
+	                    System.out.println("variable " + var.getName() + " not used");
+	                }
+	            }
+	        }
+
 
 		public void exibeComandos(){
 			for (AbstractCommand c: program.getComandos()){
@@ -167,6 +200,7 @@ public class FantasticLangParser extends Parser {
 			match(T__1);
 			  program.setVarTable(symbolTable);
 			           	  program.setComandos(stack.pop());
+			           	  verificaUsoVars();
 
 			           
 			}
@@ -278,9 +312,9 @@ public class FantasticLangParser extends Parser {
 
 				                  _varName = _input.LT(-1).getText();
 				                  _varValue = null;
-				                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
+				                  variable = new FantasticVariable(_varName, _tipo, _varValue);
 				                  if (!symbolTable.exists(_varName)){
-				                     symbolTable.add(symbol);
+				                     symbolTable.add(variable);
 				                  }
 				                  else{
 				                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
@@ -299,9 +333,9 @@ public class FantasticLangParser extends Parser {
 
 					                  _varName = _input.LT(-1).getText();
 					                  _varValue = null;
-					                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
+					                  variable = new FantasticVariable(_varName, _tipo, _varValue);
 					                  if (!symbolTable.exists(_varName)){
-					                     symbolTable.add(symbol);
+					                     symbolTable.add(variable);
 					                  }
 					                  else{
 					                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
@@ -554,8 +588,10 @@ public class FantasticLangParser extends Parser {
 			match(FP);
 			setState(71);
 			match(SC);
+			 verificaID(_readID);
 
-			              	FantasticVariable var = (FantasticVariable)symbolTable.get(_readID);
+			              	FantasticVariable var = symbolTable.get(_readID);
+			              	var.setInit(true);
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
 			              	stack.peek().add(cmd);
 			              
@@ -605,6 +641,7 @@ public class FantasticLangParser extends Parser {
 			match(ID);
 			 verificaID(_input.LT(-1).getText());
 				                  _writeID = _input.LT(-1).getText();
+				                  verificaInicializacao(_writeID);
 			                     
 			setState(78);
 			match(FP);
@@ -630,10 +667,11 @@ public class FantasticLangParser extends Parser {
 	public static class CmdattribContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(FantasticLangParser.ID, 0); }
 		public TerminalNode ATTR() { return getToken(FantasticLangParser.ATTR, 0); }
+		public TerminalNode SC() { return getToken(FantasticLangParser.SC, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode SC() { return getToken(FantasticLangParser.SC, 0); }
+		public TerminalNode TEXT() { return getToken(FantasticLangParser.TEXT, 0); }
 		public CmdattribContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -662,11 +700,31 @@ public class FantasticLangParser extends Parser {
 			setState(84);
 			match(ATTR);
 			 _exprContent = ""; 
-			setState(86);
-			expr();
-			setState(87);
+			setState(89);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+			case 1:
+				{
+				setState(86);
+				expr();
+				}
+				break;
+			case 2:
+				{
+				setState(87);
+				match(TEXT);
+				 verificaText(_exprID);
+				                            _exprContent += _input.LT(-1).getText() ;
+				                            
+				}
+				break;
+			}
+			setState(91);
 			match(SC);
 
+			                 FantasticVariable var = (FantasticVariable)symbolTable.get(_exprID);
+			                 var.setInit(true);
+			                 var.setValue(_exprContent);
 			               	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
 			               	 stack.peek().add(cmd);
 			               
@@ -727,17 +785,17 @@ public class FantasticLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(90);
+			setState(94);
 			match(T__6);
-			setState(91);
+			setState(95);
 			match(AP);
-			setState(92);
+			setState(96);
 			match(ID);
 			 _exprDecision = _input.LT(-1).getText(); 
-			setState(94);
+			setState(98);
 			match(OPREL);
 			 _exprDecision += _input.LT(-1).getText(); 
-			setState(96);
+			setState(100);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -748,62 +806,62 @@ public class FantasticLangParser extends Parser {
 				consume();
 			}
 			_exprDecision += _input.LT(-1).getText(); 
-			setState(98);
+			setState(102);
 			match(FP);
-			setState(99);
+			setState(103);
 			match(ACH);
 			 curThread = new ArrayList<AbstractCommand>();
 			                      stack.push(curThread);
 			                    
-			setState(102); 
+			setState(106); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(101);
+				setState(105);
 				cmd();
 				}
 				}
-				setState(104); 
+				setState(108); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << ID))) != 0) );
-			setState(106);
+			setState(110);
 			match(FCH);
 
 			                       listaTrue = stack.pop();
 			                    
-			setState(119);
+			setState(123);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__7) {
 				{
-				setState(108);
+				setState(112);
 				match(T__7);
-				setState(109);
+				setState(113);
 				match(ACH);
 
 				                   	 	curThread = new ArrayList<AbstractCommand>();
 				                   	 	stack.push(curThread);
 				                   	 
 				{
-				setState(112); 
+				setState(116); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(111);
+					setState(115);
 					cmd();
 					}
 					}
-					setState(114); 
+					setState(118); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << ID))) != 0) );
 				}
-				setState(116);
+				setState(120);
 				match(FCH);
 
 				                   		listaFalse = stack.pop();
@@ -858,22 +916,22 @@ public class FantasticLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(121);
+			setState(125);
 			termo();
-			setState(127);
+			setState(131);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==OP) {
 				{
 				{
-				setState(122);
+				setState(126);
 				match(OP);
 				 _exprContent += _input.LT(-1).getText();
-				setState(124);
+				setState(128);
 				termo();
 				}
 				}
-				setState(129);
+				setState(133);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -912,15 +970,16 @@ public class FantasticLangParser extends Parser {
 		TermoContext _localctx = new TermoContext(_ctx, getState());
 		enterRule(_localctx, 22, RULE_termo);
 		try {
-			setState(136);
+			setState(140);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(130);
+				setState(134);
 				match(ID);
 				 verificaID(_input.LT(-1).getText());
+				                    verificaInicializacao(_input.LT(-1).getText());
 					               _exprContent += _input.LT(-1).getText();
 				                 
 				}
@@ -928,7 +987,7 @@ public class FantasticLangParser extends Parser {
 			case NUMBER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(132);
+				setState(136);
 				match(NUMBER);
 
 				              	_exprContent += _input.LT(-1).getText();
@@ -938,7 +997,7 @@ public class FantasticLangParser extends Parser {
 			case TEXT:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(134);
+				setState(138);
 				match(TEXT);
 
 				                _exprContent += _input.LT(-1).getText();
@@ -961,42 +1020,43 @@ public class FantasticLangParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30\u008d\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30\u0091\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\3\2\3\2\3\2\3\2\3\2\3\2\3\3\6\3\"\n\3\r\3\16\3#"+
 		"\3\4\3\4\3\4\3\4\3\4\3\4\7\4,\n\4\f\4\16\4/\13\4\3\4\3\4\3\5\3\5\3\5\3"+
 		"\5\5\5\67\n\5\3\6\3\6\6\6;\n\6\r\6\16\6<\3\7\3\7\3\7\3\7\5\7C\n\7\3\b"+
 		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3"+
-		"\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3"+
-		"\13\3\13\3\13\6\13i\n\13\r\13\16\13j\3\13\3\13\3\13\3\13\3\13\3\13\6\13"+
-		"s\n\13\r\13\16\13t\3\13\3\13\3\13\5\13z\n\13\3\f\3\f\3\f\3\f\7\f\u0080"+
-		"\n\f\f\f\16\f\u0083\13\f\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u008b\n\r\3\r\2\2"+
-		"\16\2\4\6\b\n\f\16\20\22\24\26\30\2\3\3\2\26\27\2\u008d\2\32\3\2\2\2\4"+
-		"!\3\2\2\2\6%\3\2\2\2\b\66\3\2\2\2\n8\3\2\2\2\fB\3\2\2\2\16D\3\2\2\2\20"+
-		"L\3\2\2\2\22T\3\2\2\2\24\\\3\2\2\2\26{\3\2\2\2\30\u008a\3\2\2\2\32\33"+
-		"\7\3\2\2\33\34\5\4\3\2\34\35\5\n\6\2\35\36\7\4\2\2\36\37\b\2\1\2\37\3"+
-		"\3\2\2\2 \"\5\6\4\2! \3\2\2\2\"#\3\2\2\2#!\3\2\2\2#$\3\2\2\2$\5\3\2\2"+
-		"\2%&\5\b\5\2&\'\7\26\2\2\'-\b\4\1\2()\7\20\2\2)*\7\26\2\2*,\b\4\1\2+("+
-		"\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\60\3\2\2\2/-\3\2\2\2\60\61\7\r"+
-		"\2\2\61\7\3\2\2\2\62\63\7\5\2\2\63\67\b\5\1\2\64\65\7\6\2\2\65\67\b\5"+
-		"\1\2\66\62\3\2\2\2\66\64\3\2\2\2\67\t\3\2\2\28:\b\6\1\29;\5\f\7\2:9\3"+
-		"\2\2\2;<\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\13\3\2\2\2>C\5\16\b\2?C\5\20\t\2"+
-		"@C\5\22\n\2AC\5\24\13\2B>\3\2\2\2B?\3\2\2\2B@\3\2\2\2BA\3\2\2\2C\r\3\2"+
-		"\2\2DE\7\7\2\2EF\7\13\2\2FG\7\26\2\2GH\b\b\1\2HI\7\f\2\2IJ\7\r\2\2JK\b"+
-		"\b\1\2K\17\3\2\2\2LM\7\b\2\2MN\7\13\2\2NO\7\26\2\2OP\b\t\1\2PQ\7\f\2\2"+
-		"QR\7\r\2\2RS\b\t\1\2S\21\3\2\2\2TU\7\26\2\2UV\b\n\1\2VW\7\17\2\2WX\b\n"+
-		"\1\2XY\5\26\f\2YZ\7\r\2\2Z[\b\n\1\2[\23\3\2\2\2\\]\7\t\2\2]^\7\13\2\2"+
-		"^_\7\26\2\2_`\b\13\1\2`a\7\25\2\2ab\b\13\1\2bc\t\2\2\2cd\b\13\1\2de\7"+
-		"\f\2\2ef\7\21\2\2fh\b\13\1\2gi\5\f\7\2hg\3\2\2\2ij\3\2\2\2jh\3\2\2\2j"+
-		"k\3\2\2\2kl\3\2\2\2lm\7\22\2\2my\b\13\1\2no\7\n\2\2op\7\21\2\2pr\b\13"+
-		"\1\2qs\5\f\7\2rq\3\2\2\2st\3\2\2\2tr\3\2\2\2tu\3\2\2\2uv\3\2\2\2vw\7\22"+
-		"\2\2wx\b\13\1\2xz\3\2\2\2yn\3\2\2\2yz\3\2\2\2z\25\3\2\2\2{\u0081\5\30"+
-		"\r\2|}\7\16\2\2}~\b\f\1\2~\u0080\5\30\r\2\177|\3\2\2\2\u0080\u0083\3\2"+
-		"\2\2\u0081\177\3\2\2\2\u0081\u0082\3\2\2\2\u0082\27\3\2\2\2\u0083\u0081"+
-		"\3\2\2\2\u0084\u0085\7\26\2\2\u0085\u008b\b\r\1\2\u0086\u0087\7\27\2\2"+
-		"\u0087\u008b\b\r\1\2\u0088\u0089\7\24\2\2\u0089\u008b\b\r\1\2\u008a\u0084"+
-		"\3\2\2\2\u008a\u0086\3\2\2\2\u008a\u0088\3\2\2\2\u008b\31\3\2\2\2\f#-"+
-		"\66<Bjty\u0081\u008a";
+		"\n\3\n\3\n\3\n\3\n\5\n\\\n\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13"+
+		"\3\13\3\13\3\13\3\13\3\13\3\13\6\13m\n\13\r\13\16\13n\3\13\3\13\3\13\3"+
+		"\13\3\13\3\13\6\13w\n\13\r\13\16\13x\3\13\3\13\3\13\5\13~\n\13\3\f\3\f"+
+		"\3\f\3\f\7\f\u0084\n\f\f\f\16\f\u0087\13\f\3\r\3\r\3\r\3\r\3\r\3\r\5\r"+
+		"\u008f\n\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24\26\30\2\3\3\2\26\27\2\u0092"+
+		"\2\32\3\2\2\2\4!\3\2\2\2\6%\3\2\2\2\b\66\3\2\2\2\n8\3\2\2\2\fB\3\2\2\2"+
+		"\16D\3\2\2\2\20L\3\2\2\2\22T\3\2\2\2\24`\3\2\2\2\26\177\3\2\2\2\30\u008e"+
+		"\3\2\2\2\32\33\7\3\2\2\33\34\5\4\3\2\34\35\5\n\6\2\35\36\7\4\2\2\36\37"+
+		"\b\2\1\2\37\3\3\2\2\2 \"\5\6\4\2! \3\2\2\2\"#\3\2\2\2#!\3\2\2\2#$\3\2"+
+		"\2\2$\5\3\2\2\2%&\5\b\5\2&\'\7\26\2\2\'-\b\4\1\2()\7\20\2\2)*\7\26\2\2"+
+		"*,\b\4\1\2+(\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\60\3\2\2\2/-\3\2\2"+
+		"\2\60\61\7\r\2\2\61\7\3\2\2\2\62\63\7\5\2\2\63\67\b\5\1\2\64\65\7\6\2"+
+		"\2\65\67\b\5\1\2\66\62\3\2\2\2\66\64\3\2\2\2\67\t\3\2\2\28:\b\6\1\29;"+
+		"\5\f\7\2:9\3\2\2\2;<\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\13\3\2\2\2>C\5\16\b"+
+		"\2?C\5\20\t\2@C\5\22\n\2AC\5\24\13\2B>\3\2\2\2B?\3\2\2\2B@\3\2\2\2BA\3"+
+		"\2\2\2C\r\3\2\2\2DE\7\7\2\2EF\7\13\2\2FG\7\26\2\2GH\b\b\1\2HI\7\f\2\2"+
+		"IJ\7\r\2\2JK\b\b\1\2K\17\3\2\2\2LM\7\b\2\2MN\7\13\2\2NO\7\26\2\2OP\b\t"+
+		"\1\2PQ\7\f\2\2QR\7\r\2\2RS\b\t\1\2S\21\3\2\2\2TU\7\26\2\2UV\b\n\1\2VW"+
+		"\7\17\2\2W[\b\n\1\2X\\\5\26\f\2YZ\7\24\2\2Z\\\b\n\1\2[X\3\2\2\2[Y\3\2"+
+		"\2\2\\]\3\2\2\2]^\7\r\2\2^_\b\n\1\2_\23\3\2\2\2`a\7\t\2\2ab\7\13\2\2b"+
+		"c\7\26\2\2cd\b\13\1\2de\7\25\2\2ef\b\13\1\2fg\t\2\2\2gh\b\13\1\2hi\7\f"+
+		"\2\2ij\7\21\2\2jl\b\13\1\2km\5\f\7\2lk\3\2\2\2mn\3\2\2\2nl\3\2\2\2no\3"+
+		"\2\2\2op\3\2\2\2pq\7\22\2\2q}\b\13\1\2rs\7\n\2\2st\7\21\2\2tv\b\13\1\2"+
+		"uw\5\f\7\2vu\3\2\2\2wx\3\2\2\2xv\3\2\2\2xy\3\2\2\2yz\3\2\2\2z{\7\22\2"+
+		"\2{|\b\13\1\2|~\3\2\2\2}r\3\2\2\2}~\3\2\2\2~\25\3\2\2\2\177\u0085\5\30"+
+		"\r\2\u0080\u0081\7\16\2\2\u0081\u0082\b\f\1\2\u0082\u0084\5\30\r\2\u0083"+
+		"\u0080\3\2\2\2\u0084\u0087\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0086\3\2"+
+		"\2\2\u0086\27\3\2\2\2\u0087\u0085\3\2\2\2\u0088\u0089\7\26\2\2\u0089\u008f"+
+		"\b\r\1\2\u008a\u008b\7\27\2\2\u008b\u008f\b\r\1\2\u008c\u008d\7\24\2\2"+
+		"\u008d\u008f\b\r\1\2\u008e\u0088\3\2\2\2\u008e\u008a\3\2\2\2\u008e\u008c"+
+		"\3\2\2\2\u008f\31\3\2\2\2\r#-\66<B[nx}\u0085\u008e";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

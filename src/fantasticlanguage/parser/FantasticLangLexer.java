@@ -92,6 +92,7 @@ public class FantasticLangLexer extends Lexer {
 		private String _varValue;
 		private FantasticSymbolTable symbolTable = new FantasticSymbolTable();
 		private FantasticSymbol symbol;
+		private FantasticVariable variable;
 		private FantasticProgram program = new FantasticProgram();
 		private ArrayList<AbstractCommand> curThread;
 		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
@@ -108,6 +109,38 @@ public class FantasticLangLexer extends Lexer {
 				throw new FantasticSemanticException("Symbol "+id+" not declared");
 			}
 		}
+
+		public void verificaInicializacao(String id) {
+	        if(!symbolTable.get(id).isInit()) {
+	            throw new FantasticSemanticException("Variable "+id+" not init");
+	        }
+		}
+
+	    public void verificaText(String id) {
+	            verificaID(id);
+	            FantasticVariable var = symbolTable.get(id);
+	            if(var.getType() != FantasticVariable.TEXT){
+	                throw new FantasticSemanticException("variable " + var.getName() +"NOT A TEXT");
+	            }
+	    }
+
+	    public void verificaNumero(String id) {
+	            verificaID(id);
+	            FantasticVariable var = symbolTable.get(id);
+	            if(var.getType() != FantasticVariable.NUMBER){
+	                throw new FantasticSemanticException("variable " + var.getName() +"NOT A NUMBER");
+	            }
+	    }
+
+	        public void verificaUsoVars() {
+	            for(FantasticSymbol symbol : symbolTable.values()) {
+	                FantasticVariable var = (FantasticVariable) symbol;
+	                if(var.getValue() == null) {
+	                    System.out.println("variable " + var.getName() + " not used");
+	                }
+	            }
+	        }
+
 
 		public void exibeComandos(){
 			for (AbstractCommand c: program.getComandos()){

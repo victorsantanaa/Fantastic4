@@ -1,21 +1,14 @@
 programa
 
-  numero a, b;
-  texto  t1;
+  numero a, d;
+  texto  t1, t2;
 
+  t1 = 10;
+  d = "abc";
+  escreva(t1);
+  a = 10;
   leia(a);
-  leia(b);
 
-  a = 1 + 2 * 3 / b;
-  b = 10;
-  t1 = "abc";
-
-
-  se ( a > b ) {
-     escreva (a);
-  }
-  senao {
-     escreva (b);
-  }
+  a = 1 + 2 * 3;
 
 fimprog;

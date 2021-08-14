@@ -28,7 +28,7 @@ public class FantasticProgram {
         str.append("}");
 
         try {
-            FileWriter fr = new FileWriter(new File("MainClass10.java"));
+            FileWriter fr = new FileWriter(new File("src/MainClass10.java"));
             fr.write(str.toString());
             fr.close();
         }

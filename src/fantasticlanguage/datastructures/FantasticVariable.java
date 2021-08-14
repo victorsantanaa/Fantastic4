@@ -7,6 +7,7 @@ public class FantasticVariable extends FantasticSymbol {
 
     private int type;
     private String value;
+    private boolean init = false;
 
     public FantasticVariable(String name, int type, String value) {
         super(name);
@@ -28,6 +29,14 @@ public class FantasticVariable extends FantasticSymbol {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public boolean isInit() {
+        return init;
+    }
+
+    public void setInit(boolean init) {
+        this.init = init;
     }
 
     @Override

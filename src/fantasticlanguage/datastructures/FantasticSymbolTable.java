@@ -1,18 +1,19 @@
 package fantasticlanguage.datastructures;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class FantasticSymbolTable {
 
-    private HashMap<String, FantasticSymbol> map;
+    private HashMap<String, FantasticVariable> map;
 
     public FantasticSymbolTable() {
-        map = new HashMap<String, FantasticSymbol>();
+        map = new HashMap<String, FantasticVariable>();
 
     }
 
-    public void add(FantasticSymbol symbol) {
+    public void add(FantasticVariable symbol) {
         map.put(symbol.getName(), symbol);
     }
 
@@ -20,7 +21,7 @@ public class FantasticSymbolTable {
         return map.get(symbolName) != null;
     }
 
-    public FantasticSymbol get(String symbolName) {
+    public FantasticVariable get(String symbolName) {
         return map.get(symbolName);
     }
 
@@ -30,6 +31,14 @@ public class FantasticSymbolTable {
             lista.add(symbol);
         }
         return lista;
+    }
+
+    public void replace(String id, FantasticVariable newSymbol){
+        map.replace(id, newSymbol);
+    }
+
+    public Collection<FantasticVariable> values() {
+        return map.values();
     }
 
 

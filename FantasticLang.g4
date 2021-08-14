@@ -16,6 +16,7 @@ grammar FantasticLang;
 	private String _varValue;
 	private FantasticSymbolTable symbolTable = new FantasticSymbolTable();
 	private FantasticSymbol symbol;
+	private FantasticVariable variable;
 	private FantasticProgram program = new FantasticProgram();
 	private ArrayList<AbstractCommand> curThread;
 	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
@@ -33,6 +34,38 @@ grammar FantasticLang;
 		}
 	}
 
+	public void verificaInicializacao(String id) {
+        if(!symbolTable.get(id).isInit()) {
+            throw new FantasticSemanticException("Variable "+id+" not init");
+        }
+	}
+
+    public void verificaText(String id) {
+            verificaID(id);
+            FantasticVariable var = symbolTable.get(id);
+            if(var.getType() != FantasticVariable.TEXT){
+                throw new FantasticSemanticException("variable " + var.getName() +"NOT A TEXT");
+            }
+    }
+
+    public void verificaNumero(String id) {
+            verificaID(id);
+            FantasticVariable var = symbolTable.get(id);
+            if(var.getType() != FantasticVariable.NUMBER){
+                throw new FantasticSemanticException("variable " + var.getName() +"NOT A NUMBER");
+            }
+    }
+
+        public void verificaUsoVars() {
+            for(FantasticSymbol symbol : symbolTable.values()) {
+                FantasticVariable var = (FantasticVariable) symbol;
+                if(var.getValue() == null) {
+                    System.out.println("variable " + var.getName() + " not used");
+                }
+            }
+        }
+
+
 	public void exibeComandos(){
 		for (AbstractCommand c: program.getComandos()){
 			System.out.println(c);
@@ -47,6 +80,7 @@ grammar FantasticLang;
 prog	: 'programa' decl bloco  'fimprog;'
            {  program.setVarTable(symbolTable);
            	  program.setComandos(stack.pop());
+           	  verificaUsoVars();
 
            }
 		;
@@ -58,9 +92,9 @@ decl    :  (declaravar)+
 declaravar :  tipo ID  {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
-	                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
+	                  variable = new FantasticVariable(_varName, _tipo, _varValue);
 	                  if (!symbolTable.exists(_varName)){
-	                     symbolTable.add(symbol);
+	                     symbolTable.add(variable);
 	                  }
 	                  else{
 	                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
@@ -70,9 +104,9 @@ declaravar :  tipo ID  {
               	 ID {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
-	                  symbol = new FantasticVariable(_varName, _tipo, _varValue);
+	                  variable = new FantasticVariable(_varName, _tipo, _varValue);
 	                  if (!symbolTable.exists(_varName)){
-	                     symbolTable.add(symbol);
+	                     symbolTable.add(variable);
 	                  }
 	                  else{
 	                  	 throw new FantasticSemanticException("Symbol "+_varName+" already declared");
@@ -106,8 +140,10 @@ cmdleitura	: 'leia' AP
                      FP
                      SC
 
-              {
-              	FantasticVariable var = (FantasticVariable)symbolTable.get(_readID);
+              { verificaID(_readID);
+
+              	FantasticVariable var = symbolTable.get(_readID);
+              	var.setInit(true);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
               	stack.peek().add(cmd);
               }
@@ -117,6 +153,7 @@ cmdescrita	: 'escreva'
                  AP
                  ID { verificaID(_input.LT(-1).getText());
 	                  _writeID = _input.LT(-1).getText();
+	                  verificaInicializacao(_writeID);
                      }
                  FP
                  SC
@@ -130,9 +167,14 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                     _exprID = _input.LT(-1).getText();
                    }
                ATTR { _exprContent = ""; }
-               expr
+               (expr | TEXT { verificaText(_exprID);
+                            _exprContent += _input.LT(-1).getText() ;
+                            })
                SC
                {
+                 FantasticVariable var = (FantasticVariable)symbolTable.get(_exprID);
+                 var.setInit(true);
+                 var.setValue(_exprContent);
                	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
                	 stack.peek().add(cmd);
                }
@@ -177,6 +219,7 @@ expr		:  termo (
 			;
 
 termo		: ID { verificaID(_input.LT(-1).getText());
+                    verificaInicializacao(_input.LT(-1).getText());
 	               _exprContent += _input.LT(-1).getText();
                  }
             |
@@ -184,7 +227,7 @@ termo		: ID { verificaID(_input.LT(-1).getText());
               {
               	_exprContent += _input.LT(-1).getText();
               }
-              |
+            |
               TEXT
               {
                 _exprContent += _input.LT(-1).getText();
