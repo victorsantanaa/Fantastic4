@@ -103,7 +103,6 @@ public class FantasticLangLexer extends Lexer {
 		private String _exprDecision;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
-
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
 				throw new FantasticSemanticException("Symbol "+id+" not declared");

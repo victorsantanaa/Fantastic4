@@ -110,7 +110,6 @@ public class FantasticLangParser extends Parser {
 		private String _exprDecision;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
-
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
 				throw new FantasticSemanticException("Symbol "+id+" not declared");
@@ -201,7 +200,6 @@ public class FantasticLangParser extends Parser {
 			  program.setVarTable(symbolTable);
 			           	  program.setComandos(stack.pop());
 			           	  verificaUsoVars();
-
 			           
 			}
 		}
@@ -589,7 +587,6 @@ public class FantasticLangParser extends Parser {
 			setState(71);
 			match(SC);
 			 verificaID(_readID);
-
 			              	FantasticVariable var = symbolTable.get(_readID);
 			              	var.setInit(true);
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);

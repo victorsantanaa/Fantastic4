@@ -27,7 +27,6 @@ grammar FantasticLang;
 	private String _exprDecision;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
-
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
 			throw new FantasticSemanticException("Symbol "+id+" not declared");
@@ -81,7 +80,6 @@ prog	: 'programa' decl bloco  'fimprog;'
            {  program.setVarTable(symbolTable);
            	  program.setComandos(stack.pop());
            	  verificaUsoVars();
-
            }
 		;
 
@@ -141,7 +139,6 @@ cmdleitura	: 'leia' AP
                      SC
 
               { verificaID(_readID);
-
               	FantasticVariable var = symbolTable.get(_readID);
               	var.setInit(true);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
@@ -211,79 +208,6 @@ cmdselecao  :  'se' AP
                    	}
                    )?
             ;
-
-            /*************************************************************/
-
-
-
-cmdwhile    : 'lacoEnquanto'
-    AP {ArrayList<AbstractCommand> thread = new ArrayList<AbstractCommand>();
-        ArrayList<AbstractCommand> list = new ArrayList<AbstractCommand>();}
-    boolExpr
-                     FP { CommandWhile cmd = new CommandWhile(_exprDecision);}
-                     ACH   {
-                               whileThread = new ArrayList<AbstractCommand>();
-                               stack.push(whileThread);
-                     }
-                     (cmd)+
-                     FCH   {
-                               whileList = stack.pop();
-                               cmd.setWhileCommands(whileList);
-                               stack.peek().add(cmd);
-                     }
-                   ;
-       boolExpr      : { _exprDecision = "";} boolExprChild ;
-       boolExprChild      : boolExprChildChild
-                     |
-                     (
-                       (
-                           boolExprChildChild
-                           ('&&'| '||') { _exprDecision += _input.LT(-1).getText();}
-                       )?
-                       NOT? { _exprDecision += _input.LT(-1).getText();}
-                       AP { _exprDecision += _input.LT(-1).getText();}
-                       boolExprChild
-                       FP { _exprDecision += _input.LT(-1).getText();}
-                       (
-                           ('&&'| '||') { _exprDecision += _input.LT(-1).getText();}
-                           boolExprChild
-                       )*
-                     )*
-                   ;
-
-
-       boolExprChildChild    : boolTermo { _exprDecision += _input.LT(-1).getText(); }
-                     OPREL     { _exprDecision += _input.LT(-1).getText(); }
-                     boolTermo { _exprDecision += _input.LT(-1).getText(); }
-                     (
-                       ('&&'| '||') { _exprDecision += _input.LT(-1).getText(); }
-                       boolTermo { _exprDecision += _input.LT(-1).getText(); }
-                       OPREL { _exprDecision += _input.LT(-1).getText(); }
-                       boolTermo { _exprDecision += _input.LT(-1).getText(); }
-                     )*
-                   ;
-
-
-       boolTermo   : (
-                      ID {
-                           if(!isIDDeclared(_input.LT(-1).getText())){
-                               throw new IsiSemanticException(getCurrentToken().getLine(), getCurrentToken().getCharPositionInLine(), "Symbol `" + _input.LT(-1).getText()  + "` NOT declared");
-                           }
-                           if(!isVarInitialized(_input.LT(-1).getText())){
-                               throw new IsiSemanticException(getCurrentToken().getLine(), getCurrentToken().getCharPositionInLine(), "Symbol `" + _input.LT(-1).getText()  + "` NOT initialized");
-                           }
-                           if(!isNumber(_input.LT(-1).getText())){
-                               throw new IsiSemanticException(getCurrentToken().getLine(), getCurrentToken().getCharPositionInLine(), "Comparsion operations are expectating a 'numero' type, NOT a 'text' type");
-                           }
-                      }
-                      |
-                      NUMBER
-                   )
-                   ;
-       			/***************************************************/
-
-
-
 
 expr		:  termo (
 	             OP  { _exprContent += _input.LT(-1).getText();}
