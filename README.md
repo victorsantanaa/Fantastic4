@@ -34,6 +34,6 @@ A ordem escolhida foi a seguinte:
 |  Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos  |  - |
 |  Possui operações de Entrada e Saída                                            | Ok |
 |  Aceitar números decimais                                                       |  Ok |
-|  Verificar se variável foi ou não declarada                                     |  - |
-|  Verificar se variável declarada foi ou não utilizada                           |  - |
+|  Verificar se variável foi ou não declarada                                     |  Ok |
+|  Verificar se variável declarada foi ou não utilizada                           |  Ok |
 |  Linguagem Destino (C/Java/Puthon)                                              |  Ok |
